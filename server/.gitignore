@@ -1,0 +1,9 @@
+pyrightconfig.json
+
+*.keras
+*.JPG
+.venv/
+__pycache__/
+*.py[cod]
+
+*.env
