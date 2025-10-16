@@ -27,4 +27,5 @@ def predict_image(image_path):
 
 
 for img in os.listdir(photos_dir):
-    predict_image(photos_dir+img)
+    if img[-3:]=="JPG":
+        predict_image(photos_dir+img)
