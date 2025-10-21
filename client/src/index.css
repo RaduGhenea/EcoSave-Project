@@ -1,0 +1,125 @@
+body {
+  background-color: #D0F5BE;
+  padding: 0px;
+}
+
+.main-container {
+  /*background-color: rebeccapurple;*/
+  display: flex;
+  height: 95vh;
+  margin: 0px;
+  width: 1fr;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #FBFFDC;
+  min-width: 250px;
+  min-height: 450px;
+  height: 85%;
+  max-height: 600px;
+  width: 300px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 5px rgba(25, 25, 25, 0.2);
+  padding: 0px;
+}
+
+.card-title-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 0px;
+  height: 10%;
+  background-color: #A4907C;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding-bottom: 35px;
+}
+.card-title {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  color: whitesmoke;
+  font-weight: bold;
+}
+.card-content-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  flex: 4;
+  flex-direction: column-reverse;
+  padding-bottom: 0px;
+}
+
+.image-check-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0px;
+  /*background-color: purple;*/
+}
+
+.image-check-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-check-form label {
+  margin-bottom: 15px;
+}
+
+.image-check-container input {
+  margin-bottom: 10px;
+}
+input[type="file"] {
+  display: none;
+}
+
+.custom-upload {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: #A4907C;
+  cursor: pointer;
+  opacity: 1.0;
+  transition-duration: 0.25s;
+}
+.custom-upload:hover {
+  opacity: 0.75;
+}
+.custom-upload:active {
+  opacity: 1.0;
+}
+
+input[type="submit"], input[type="file"]::file-selector-button {
+  cursor: pointer;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  border: none;
+  width: 60px;
+  height: 35px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: #A4907C;
+  opacity: 1.0;
+  transition-duration: 0.25s;
+}
+input[type="submit"]:hover {
+  opacity: 0.75;
+}
+input[type="submit"]:active {
+  opacity: 1.0;
+}
+
+.recycle-image {
+  height: 250px;
+  width: 250px;
+}

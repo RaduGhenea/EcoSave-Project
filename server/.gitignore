@@ -1,5 +1,6 @@
 pyrightconfig.json
 
+*.h5
 *.keras
 *.JPG
 .venv/

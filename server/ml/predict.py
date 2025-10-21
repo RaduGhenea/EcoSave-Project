@@ -11,7 +11,7 @@ class_names=['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
 def classid_to_name(id):
     return class_names[id]
 
-def preprocess_image(image_path, target_size=(128, 128)):
+def preprocess_image(image_path, target_size=(224, 224)):
     img = image.load_img(image_path, target_size=target_size)
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
@@ -25,7 +25,7 @@ def predict_image(image_path):
     confidence = np.max(predictions)
     print(classid_to_name(predicted_class), confidence)
 
-
 for img in os.listdir(photos_dir):
-    if img[-3:]=="JPG":
+    if img != '.gitkeep':
+        print(img[:-4])
         predict_image(photos_dir+img)
