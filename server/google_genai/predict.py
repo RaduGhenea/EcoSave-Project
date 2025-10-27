@@ -1,8 +1,9 @@
 from google import genai
+import config
 
+def predict(prompt, options, image):
+    client = genai.Client(api_key=config.AI_KEY)
 
-def predict(prompt, options, image, key):
-    client = genai.Client(api_key=key)
     response = client.models.generate_content(
         model="gemini-2.5-flash", contents=[prompt, options, image]
     )

@@ -2,13 +2,12 @@ import { useState, useRef } from "react"
 
 function ImageCheck() {
 
-
-
   const fileInput=useRef()
-  const imageLink="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNZrTy12yoy83gLwhX4dr9RoDdj7t_myuxag&s"
+  const imageLink="src/assets/can.png"
 
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
+  const [output, setOutput] = useState()
 
   function handleFileUpload(event) {
     setFileName(event.target.files[0].name)
@@ -32,7 +31,7 @@ function ImageCheck() {
       body: formData,
     })
     const result = await response.json()
-    alert(result)
+    setOutput(result);
   }
 
   return(
@@ -42,7 +41,9 @@ function ImageCheck() {
       <form onSubmit={handleSubmit} className="image-check-form">
         <label
           htmlFor="garbageImage"
-          className="custom-upload">{fileName ? fileName : "Upload Image"}
+          className="custom-upload"
+        >
+          {fileName ? fileName : "Upload Image"}
         </label>
           <input
             ref={fileInput}
@@ -52,8 +53,10 @@ function ImageCheck() {
             accept="image/png, image/jpeg"
             onChange={handleFileUpload}
           ></input>
-        <input type="submit" value="Check"></input>
+        <label className="custom-submit" htmlFor="submitButton">Check</label>
+        <input id="submitButton" type="submit" value="Check"></input>
       </form>
+      <p>{output}</p>
     </div>
   )
 }
