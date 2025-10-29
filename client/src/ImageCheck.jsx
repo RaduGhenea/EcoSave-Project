@@ -3,11 +3,11 @@ import { useState, useRef } from "react"
 function ImageCheck() {
 
   const fileInput=useRef()
-  const imageLink="src/assets/can.png"
+  const imageLink="src/assets/recycle_screen.png"
 
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
-  const [output, setOutput] = useState()
+  const [output, setOutput] = useState("CardBoard")
 
   function handleFileUpload(event) {
     setFileName(event.target.files[0].name)
@@ -21,7 +21,10 @@ function ImageCheck() {
   async function handleSubmit(event) {
     event.preventDefault()
     const file = fileInput.current.files[0]
-    if(!file) return alert("no image selected")
+    if(!file) {
+      setOutput("Glass")
+      return
+    }
 
     const formData = new FormData()
     formData.append("image", file)
@@ -43,7 +46,7 @@ function ImageCheck() {
           htmlFor="garbageImage"
           className="custom-upload"
         >
-          {fileName ? fileName : "Upload Image"}
+          {fileName ? fileName : "Browse Image"}
         </label>
           <input
             ref={fileInput}
@@ -53,10 +56,13 @@ function ImageCheck() {
             accept="image/png, image/jpeg"
             onChange={handleFileUpload}
           ></input>
-        <label className="custom-submit" htmlFor="submitButton">Check</label>
+        <label className="custom-submit" htmlFor="submitButton">Upload</label>
         <input id="submitButton" type="submit" value="Check"></input>
       </form>
-      <p>{output}</p>
+      <div className="response">
+        <img className="check-mark" src="src/assets/Sign-check-icon.png"></img>
+        <p className="response-text">{output}</p>
+      </div>
     </div>
   )
 }
