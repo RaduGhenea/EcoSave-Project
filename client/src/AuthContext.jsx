@@ -8,14 +8,14 @@ function AuthProvider({children}) {
   const [streak, setStreak] = useState(0)
   const [name, setName] = useState("")
 
+
   const setData = (name, streak) => {
     setName(name)
     setStreak(streak)
   }
 
-  const login = (new_token, name, streak) => {
+  const login = (new_token) => {
     setToken(new_token)
-    setData(name, streak)
     localStorage.setItem("token", new_token)
   }
   const logout = () => {

@@ -1,64 +1,11 @@
-function Leaderboard() {
-  const leaderboard = [
-    {
-      name: "Radu1",
-      score: 120
-    },
-    {
-      name: "Radu2",
-      score: 69
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-    {
-      name: "Radu3",
-      score: 67
-    },
-  ]
+function Leaderboard({ leaderboard }) {
+
 
   return(
    <div className="image-check-container">
      <ul className="list">
        {leaderboard.map((user, index) => (
-         <li className="list-element" key={user.name}>
+         <li className="list-element" key={index}>
            <div className="list-div">
              <div className="rank-bg">
                <p className="rank-text">{index + 1}</p>

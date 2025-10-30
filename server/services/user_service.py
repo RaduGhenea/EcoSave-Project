@@ -8,3 +8,9 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     username = db.Column(db.String(15), unique=True)
     streak = db.Column(db.Integer, default=0)
+
+class DailyScores(db.Model):
+    __tablename__ = "Daily"
+    id = db.Column(db.String(32), primary_key=True, default=uuid4().hex)
+    user_id = db.Column(db.String(32), db.ForeignKey('Users.id'), nullable=False)
+    score = db.Column(db.Integer, default=0)

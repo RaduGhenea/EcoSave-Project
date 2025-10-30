@@ -1,7 +1,10 @@
 from flask import Blueprint, request
 from flask import jsonify
+from flask.globals import session
 from flask_jwt_extended.utils import current_user
-from services.user_service import User
+from google.genai.types import SessionResumptionConfigOrDict
+from sqlalchemy import func
+from services.user_service import User, DailyScores
 from extensions import bcrypt, jwt, db
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
@@ -24,10 +27,45 @@ def verify_user():
     id = get_jwt_identity()
     current_user = User.query.filter_by(id=id).first()
     if current_user is None:
-        return jsonify({"erroe": "could not find user"})
-
+        return jsonify({"error": "could not find user"})
 
     return jsonify(username=current_user.username, streak=current_user.streak)
+
+@user_bp.route('/getuserdata', methods=["GET"])
+@jwt_required()
+def get_data():
+    id = get_jwt_identity()
+    current_user = User.query.filter_by(id=id).first()
+    if current_user is None:
+        return jsonify({"error": "could not find user"})
+    user_daily = DailyScores.query.filter_by(user_id=id).first()
+    if user_daily is None:
+        return jsonify({"error": "could not get user daily stats"})
+
+
+    user_rank = (
+        db.session.query(func.count(DailyScores.id))
+        .filter(DailyScores.score > user_daily.score).scalar()
+    )+1
+    print("cevaa")
+    return jsonify(
+        username=current_user.username,
+        streak=current_user.streak,
+        placement=user_rank
+    )
+
+@user_bp.route('/getleaderboard', methods=["GET"])
+@jwt_required()
+def get_leaderboard():
+    leaderboard = db.session.query(
+        User.username,
+        DailyScores.score
+    ).join(DailyScores, User.id == DailyScores.user_id).order_by(DailyScores.score.desc()).all()
+
+    # print(leaderboard[0])
+    dict_leaderboard = [{"name": user, "score": score} for user, score in leaderboard]
+    return jsonify(leaderboard=dict_leaderboard)
+
 
 
 @user_bp.route('/login', methods=["POST"])
@@ -44,11 +82,15 @@ def login_user():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"error": "unauthorized"}), 401
 
-    token = create_access_token(identity=user.id)
+    user_daily = DailyScores.query.filter_by(user_id=user.id).first()
+    if user_daily is None:
+        new_daily = (DailyScores(user_id=user.id, score=250))
+        db.session.add(new_daily)
+        db.session.commit()
 
+    token = create_access_token(identity=user.id)
+    print(token)
     return jsonify({
-        "id": user.id,
-        "email": user.email,
         "username": user.username,
         "streak": user.streak,
         "access_token": token

@@ -1,8 +1,8 @@
 import { useAuth } from "./context"
 
-function ProfileContent() {
+function ProfileContent({streak, name, rank}) {
 
-  const {logout, streak, name} = useAuth()
+  const {logout} = useAuth()
 
   return (
     <div className="image-check-container">
@@ -12,7 +12,7 @@ function ProfileContent() {
       </div>
       <div className="profile-container">
         <p className="profile-text">{`Name: ${name}`}</p>
-        <p className="profile-text">Placement: #1</p>
+        <p className="profile-text">{`Placement: #${ rank }`}</p>
       </div>
       <button className="signout-button" onClick={logout}>Sign Out</button>
 

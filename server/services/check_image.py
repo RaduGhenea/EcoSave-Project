@@ -17,6 +17,6 @@ def check_image(image: Image.Image, options: list[str] | None=None) -> str:
         prediction = result.candidates[0].content.parts[0].text
 
     # prediction = "turned off"
-    prediction[0]=prediction[0].upper()
+    prediction = prediction.capitalize()
     if prediction: return prediction
     return "Could not get AI response"
