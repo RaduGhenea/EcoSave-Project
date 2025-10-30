@@ -84,7 +84,7 @@ def login_user():
 
     user_daily = DailyScores.query.filter_by(user_id=user.id).first()
     if user_daily is None:
-        new_daily = (DailyScores(user_id=user.id, score=250))
+        new_daily = (DailyScores(user_id=user.id, score=0))
         db.session.add(new_daily)
         db.session.commit()
 
