@@ -7,7 +7,7 @@ function ImageCheck() {
 
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
-  const [output, setOutput] = useState("CardBoard")
+  const [output, setOutput] = useState()
 
   function handleFileUpload(event) {
     setFileName(event.target.files[0].name)
@@ -59,7 +59,7 @@ function ImageCheck() {
         <label className="custom-submit" htmlFor="submitButton">Upload</label>
         <input id="submitButton" type="submit" value="Check"></input>
       </form>
-      <div className="response">
+      <div className={output ? "response" : "vanish"}>
         <img className="check-mark" src="src/assets/Sign-check-icon.png"></img>
         <p className="response-text">{output}</p>
       </div>

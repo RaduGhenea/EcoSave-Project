@@ -94,8 +94,11 @@ input[type="file"] {
 input[type="submit"] {
   display: none;
 }
+input[type="text"], input[type="password"] {
+  margin-bottom: 0px;
+}
 
-.custom-upload, .custom-submit, button {
+.custom-upload, .custom-submit, button, .signin-label {
   font-family: Roboto, Arial, Helvetica, sans-serif;
   padding: 10px 10px 10px 10px;
   border: none;
@@ -119,7 +122,11 @@ input[type="submit"] {
 .signout-button:hover {
   background-color: indianred;
 }
-.custom-upload:active, .custom-submit:active, button:active {
+.signin-label:hover {
+  background-color: #7cb868;
+}
+
+.custom-upload:active, .custom-submit:active, .signin-label:active, button:active {
   opacity: 1.0;
 }
 .signout-button {
@@ -225,4 +232,7 @@ input[type="submit"] {
   height: 350px;
   padding: 0px 20px 0px 20px;
   overflow: auto;
+}
+.vanish {
+  display: none;
 }
