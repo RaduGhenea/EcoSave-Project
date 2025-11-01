@@ -1,6 +1,10 @@
 # Instructiuni de folosire backend
 pentru rularea oricarui script python trebuie mai intai instalate toate librariile gasite in 'requirements.txt'
 
+## pornire server:
+scriptul main.py porneste serverul pe portul 3000
+
+
 ## ml:
 scriptul predict.py printeaza, in ordine, rezultatul pentru fiecare poza din directorul 'test_photos'
 modelul folosit este cel gasit in fisierul 'models'.
