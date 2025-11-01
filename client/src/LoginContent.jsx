@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "./context"
 import { useNavigate } from "react-router-dom"
+const API_URL = import.meta.env.VITE_API_URL;
 import './login.css'
 
 function LoginContent() {
@@ -16,7 +17,7 @@ function LoginContent() {
     data.append("email", emailInput)
     data.append("password", passwordInput)
     console.log(data)
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       body: data
     })

@@ -1,9 +1,10 @@
 import { useState, useRef } from "react"
+import canImage from './assets/recycle_screen.png'
+import checkImage from './assets/Sign-check-icon.png'
 
 function ImageCheck() {
 
   const fileInput=useRef()
-  const imageLink="src/assets/recycle_screen.png"
 
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
@@ -39,7 +40,7 @@ function ImageCheck() {
 
   return(
     <div className="image-check-container">
-      <img className="recycle-image" src={displayImage ? displayImage : imageLink}></img>
+      <img className="recycle-image" src={displayImage ? displayImage : canImage}></img>
 
       <form onSubmit={handleSubmit} className="image-check-form">
         <label
@@ -60,7 +61,7 @@ function ImageCheck() {
         <input id="submitButton" type="submit" value="Check"></input>
       </form>
       <div className={output ? "response" : "vanish"}>
-        <img className="check-mark" src="src/assets/Sign-check-icon.png"></img>
+        <img className="check-mark" src={checkImage}></img>
         <p className="response-text">{output}</p>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { AuthContext } from "./context";
 import { useEffect } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 function AuthProvider({children}) {
@@ -24,7 +25,7 @@ function AuthProvider({children}) {
   }
   useEffect(() => {
     if(!token) return
-    fetch('http://localhost:3000/verify', {
+    fetch(`${API_URL}/verify`, {
       method: "GET",
       headers: {Authorization: `Bearer ${token}`},
     })

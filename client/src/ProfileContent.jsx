@@ -1,4 +1,5 @@
 import { useAuth } from "./context"
+import streakImage from './assets/streak_screen.png'
 
 function ProfileContent({streak, name, rank}) {
 
@@ -7,7 +8,7 @@ function ProfileContent({streak, name, rank}) {
   return (
     <div className="image-check-container">
       <div className="streak-container">
-        <img className="streak-image" src="src/assets/streak_screen.png" />
+        <img className="streak-image" src={streakImage} />
         <p className="response-text">{`${streak ? streak : 0} Days`}</p>
       </div>
       <div className="profile-container">

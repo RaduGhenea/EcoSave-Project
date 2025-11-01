@@ -5,6 +5,7 @@ import Leaderboard from "./LeaderBoard"
 import ProfileContent from "./ProfileContent"
 import { useAuth } from "./context"
 import { useState } from "react"
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const { token } = useAuth()
@@ -14,7 +15,7 @@ function App() {
   const [leaderboard, setLeaderboard] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/getuserdata', {
+    fetch(`${API_URL}/getuserdata`, {
       method: "GET",
       headers: {Authorization: `Bearer ${token}`},
     })
@@ -28,7 +29,7 @@ function App() {
       setRank(data.placement)
     })
 
-    fetch('http://localhost:3000/getleaderboard', {
+    fetch(`${API_URL}/getleaderboard`, {
       method: "GET",
       headers: {Authorization: `Bearer ${token}`},
     })
