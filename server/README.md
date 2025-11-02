@@ -31,6 +31,10 @@ Pentru verificarea imaginilor folosim modelul google gemini
   **user_service.py** initializeaza tabelele in baza de date
 
 
+## pornire server:
+scriptul main.py porneste serverul pe portul 3000
+
+
 ## ml:
 
 scriptul predict.py printeaza, in ordine, rezultatul pentru fiecare poza din directorul 'test_photos'
