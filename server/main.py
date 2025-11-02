@@ -5,7 +5,7 @@ from services.check_image import check_image
 from routes.user_routes import user_bp
 from PIL import Image
 from extensions import bcrypt, db, jwt
-
+import time
 
 app = Flask(__name__)
 app.config.from_object(config.app_config)
@@ -23,7 +23,10 @@ with app.app_context():
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
     image = request.files['image']
-    return jsonify(check_image(Image.open(image)))
+    response = check_image(Image.open(image))
+    if response is None:
+        response = "could not get Ai response"
+    return jsonify(response), 404
 
 if __name__ == "__main__":
     app.run(debug=True, port=3000)

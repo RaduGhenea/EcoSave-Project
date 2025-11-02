@@ -13,11 +13,12 @@ body {
   height: 95vh;
   margin: 0px;
   width: 1fr;
-  justify-content: space-evenly;
+  justify-content: center;
+  column-gap: 50px;
   align-items: center;
 }
 
-.card-container {
+.card-container, .About-Us-Card {
   display: flex;
   flex-direction: column;
   row-gap: 0px;
@@ -25,12 +26,15 @@ body {
   background-color: #fffefc;
   min-width: 250px;
   min-height: 500px;
-  height: 90%;
-  max-height: 600px;
+  /*height: 90%;*/
   width: 300px;
   border-radius: 40px;
   box-shadow: 5px 5px 5px rgba(25, 25, 25, 0.2);
   padding: 0px;
+  padding-bottom: 10px;
+}
+.About-Us-Card {
+  width: 500px;
 }
 
 .card-title-container {
@@ -52,11 +56,14 @@ body {
   font-weight: bold;
   margin-bottom: 0px;
 }
-.card-content-container {
+.card-content-container, .about-card-content-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding-bottom: 0px;
+}
+.about-card-content-container {
+  padding: 20px
 }
 
 .image-check-container {
@@ -163,6 +170,13 @@ input[type="text"], input[type="password"] {
   border-radius: 16%;
   margin-top: 0px;
 }
+
+.about-background {
+  background-color: #f5f9ef;
+  padding: 10px;
+  border-radius: 30px;
+}
+
 .check-mark {
   height: 20px;
   margin-right: 3px;
@@ -238,4 +252,56 @@ input[type="text"], input[type="password"] {
 }
 .vanish {
   display: none;
+}
+.about-signin {
+  margin-left: 20px;
+}
+.about-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 20px;
+  padding-top: 20px;
+}
+.link-text {
+  color: lightgrey;
+  text-align: center;
+  font-size: 10px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+.link-click {
+  text-decoration-line: underline;
+  font-weight: bold;
+  transition-duration: 0.25s;
+  cursor: pointer;
+}
+.link-click:hover {
+  color: darkgrey;
+}
+.home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 10px;
+  height: 10px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin-right: 3px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

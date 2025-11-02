@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import canImage from './assets/recycle_screen.png'
 import checkImage from './assets/Sign-check-icon.png'
+import crossImage from './assets/redcross.png'
 
 function ImageCheck() {
 
@@ -9,6 +10,7 @@ function ImageCheck() {
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
   const [output, setOutput] = useState()
+  const [resImage, setResImage] = useState(checkImage)
 
   function handleFileUpload(event) {
     setFileName(event.target.files[0].name)
@@ -23,18 +25,22 @@ function ImageCheck() {
     event.preventDefault()
     const file = fileInput.current.files[0]
     if(!file) {
-      setOutput("Glass")
+      setOutput("No Image Uploaded")
+      setResImage(crossImage)
       return
     }
+    setResImage(checkImage)
 
     const formData = new FormData()
     formData.append("image", file)
+    setOutput("loading")
 
     const response = await fetch('http://localhost:3000/upload-image', {
       method: "POST",
       body: formData,
     })
     const result = await response.json()
+    if(!response.ok) setResImage(crossImage)
     setOutput(result);
   }
 
@@ -61,7 +67,8 @@ function ImageCheck() {
         <input id="submitButton" type="submit" value="Check"></input>
       </form>
       <div className={output ? "response" : "vanish"}>
-        <img className="check-mark" src={checkImage}></img>
+        <img className={output != "loading" ? "check-mark" : "vanish"} src={resImage}></img>
+        <div className={output=="loading" ? "loader" : "vanish"}></div>
         <p className="response-text">{output}</p>
       </div>
     </div>

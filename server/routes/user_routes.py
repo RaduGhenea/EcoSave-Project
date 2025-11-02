@@ -77,10 +77,10 @@ def login_user():
 
     user = User.query.filter_by(email=email).first()
     if user is None:
-        return jsonify({"error": "unauthorized"}), 401
+        return jsonify({"error": "account doesnt exist"}), 401
 
     if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "unauthorized"}), 401
+        return jsonify({"error": "wrong password"}), 401
 
     user_daily = DailyScores.query.filter_by(user_id=user.id).first()
     if user_daily is None:
