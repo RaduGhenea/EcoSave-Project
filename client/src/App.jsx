@@ -15,15 +15,23 @@ function App() {
   const [leaderboard, setLeaderboard] = useState([])
 
   useEffect(() => {
+    if (!token) return
     fetch(`${API_URL}/getuserdata`, {
       method: "GET",
       headers: {Authorization: `Bearer ${token}`},
     })
     .then((res) => {
       if(!res.ok) throw new Error("invalid token")
+      // console.log(res.text())
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        // Probably an OPTIONS response or HTML; ignore it
+        return null;
+      }
       return res.json()
     })
     .then((data) => {
+      if(!data) return
       setStreak(data.streak)
       setName(data.username)
       setRank(data.placement)
@@ -35,10 +43,15 @@ function App() {
     })
     .then((res) => {
       if(!res.ok) throw new Error("invalid token")
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        // Probably an OPTIONS response or HTML; ignore it
+        return null;
+      }
       return res.json()
     })
     .then((data) => {
-      setLeaderboard(data.leaderboard)
+      if(data) setLeaderboard(data.leaderboard)
     })
 
   }, [token])

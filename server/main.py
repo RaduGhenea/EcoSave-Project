@@ -15,7 +15,12 @@ bcrypt.init_app(app)
 db.init_app(app)
 jwt.init_app(app)
 
-cors=CORS(app, origins="*")
+cors=CORS(
+    app, origins=["http://localhost:5173"],
+    supports_credentials=True,           # allow Authorization or cookies
+    methods=["GET", "POST", "OPTIONS"],  # allow GET and OPTIONS
+    allow_headers=["Content-Type", "Authorization"]
+)
 
 with app.app_context():
     db.create_all()

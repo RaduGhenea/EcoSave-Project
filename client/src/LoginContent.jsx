@@ -16,11 +16,11 @@ function LoginContent() {
     const data = new FormData()
     data.append("email", emailInput)
     data.append("password", passwordInput)
-    console.log(data)
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       body: data
     })
+    // console.log(response)
     const result = await response.json()
     if(result.error == null) {
       login(result.access_token)

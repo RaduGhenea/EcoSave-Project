@@ -27,14 +27,22 @@ function AuthProvider({children}) {
     if(!token) return
     fetch(`${API_URL}/verify`, {
       method: "GET",
+      // credentials: "include",
       headers: {Authorization: `Bearer ${token}`},
     })
       .then((res) => {
-        if(!res.ok) throw new Error("invalid token")
-        return res.json()
+        if(!res.ok) console.log("AAAA")  // throw new Error("invalid token")
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          // Probably an OPTIONS response or HTML; ignore it
+          console.log(res.text())
+          return null;
+        }
+
+        return res.json();
       })
-      .then((data) => setData(data.username, data.streak))
-      .catch(() => logout())
+      .then((data) => console.log(data))
+      .catch((e) => logout())
   }, [token])
 
   return (
