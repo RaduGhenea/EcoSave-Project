@@ -56,12 +56,15 @@ function App() {
 
   }, [token])
 
+  function AddStreak() {
+    setStreak(streak+1)
+  }
 
   return (
     <>
       <div className="main-container">
         <Card title="Recycle">
-          <ImageCheck />
+          <ImageCheck OnStreakChange={AddStreak} />
         </Card>
         <Card title="Leaderboard">
           <Leaderboard leaderboard={leaderboard} />

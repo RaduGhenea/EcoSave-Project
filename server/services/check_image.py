@@ -5,7 +5,7 @@ from typing import Any, List
 import time
 
 default_options = ['paper', 'glass', 'metal', 'carboard', 'organic', 'plastic']
-prompt='tell me what type of trash there is in the given image. reply in only one word from the options given'
+prompt='tell me what type of trash there is in the given image. reply in one word or a series of relevant ones from the options given'
 
 def check_image(image: Image.Image, options: list[str] | None=None):
     image = image.resize(config.target_size)

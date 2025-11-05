@@ -61,6 +61,7 @@ body {
   justify-content: center;
   flex-direction: column;
   padding-bottom: 0px;
+  overflow: auto;
 }
 .about-card-content-container {
   padding: 20px

@@ -1,15 +1,11 @@
 from flask import Blueprint, request
 from flask import jsonify
-from flask.globals import session
-from flask_jwt_extended.utils import current_user
-from google.genai.types import SessionResumptionConfigOrDict
 from sqlalchemy import func
 from services.user_service import User, DailyScores
 from extensions import bcrypt, jwt, db
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 user_bp = Blueprint("user_bp", __name__)
-
 
 @user_bp.route('/test', methods=["POST"])
 def test():

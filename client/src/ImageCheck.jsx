@@ -2,10 +2,12 @@ import { useState, useRef } from "react"
 import canImage from './assets/recycle_screen.png'
 import checkImage from './assets/Sign-check-icon.png'
 import crossImage from './assets/redcross.png'
+import { useAuth } from "./context"
 
-function ImageCheck() {
+function ImageCheck({ OnStreakChange }) {
 
   const fileInput=useRef()
+  const { token } = useAuth()
 
   const [displayImage, setDisplayImage] = useState();
   const [fileName, setFileName] = useState()
@@ -37,11 +39,22 @@ function ImageCheck() {
 
     const response = await fetch('http://localhost:3000/upload-image', {
       method: "POST",
+      headers: { Authorization: token ? `Bearer ${token}` : "" },
       body: formData,
     })
+    console.log(response)
     const result = await response.json()
-    if(!response.ok) setResImage(crossImage)
-    setOutput(result);
+    if (!response.ok) {
+      setResImage(crossImage)
+      setOutput("Could Not Get result")
+    }
+    else {
+      setResImage(checkImage)
+      setOutput(result.response);
+      if(result.streakchanged) {
+        OnStreakChange()
+      }
+    }
   }
 
   return(
