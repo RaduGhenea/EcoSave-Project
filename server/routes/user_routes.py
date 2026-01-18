@@ -38,7 +38,6 @@ def get_data():
     if user_daily is None:
         return jsonify({"error": "could not get user daily stats"})
 
-
     user_rank = (
         db.session.query(func.count(DailyScores.id))
         .filter(DailyScores.score > user_daily.score).scalar()

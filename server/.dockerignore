@@ -1,0 +1,17 @@
+pyrightconfig.json
+
+*.h5
+*.keras
+*.JPG
+.venv/
+__pycache__/
+*.py[cod]
+
+*.env
+
+templates
+testing
+*.db
+
+test_photos
+.gitignore

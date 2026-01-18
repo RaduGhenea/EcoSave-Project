@@ -9,7 +9,6 @@ function AuthProvider({children}) {
   const [streak, setStreak] = useState(0)
   const [name, setName] = useState("")
 
-
   const setData = (name, streak) => {
     setName(name)
     setStreak(streak)
@@ -27,14 +26,12 @@ function AuthProvider({children}) {
     if(!token) return
     fetch(`${API_URL}/verify`, {
       method: "GET",
-      // credentials: "include",
       headers: {Authorization: `Bearer ${token}`},
     })
       .then((res) => {
-        if(!res.ok) console.log("AAAA")  // throw new Error("invalid token")
+        if(!res.ok) console.log("invalid token") 
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
-          // Probably an OPTIONS response or HTML; ignore it
           console.log(res.text())
           return null;
         }
@@ -42,7 +39,10 @@ function AuthProvider({children}) {
         return res.json();
       })
       .then((data) => console.log(data))
-      .catch((e) => logout())
+      .catch(() => {
+        logout()
+        // navigate('/')
+      })
   }, [token])
 
   return (

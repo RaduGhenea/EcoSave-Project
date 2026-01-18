@@ -1,0 +1,24 @@
+services:
+  backend:
+    # build: ./server
+    image: backend_image
+    build: ./server
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      # - GOOGLE_GENAI_KEY=CHEIE
+      - JWT_SECRET_KEY=supersecretkey
+      - DATABASE_PATH=/database.db
+
+  frontend:
+    # build: ./client
+    image: frontend_image
+    build: ./client
+    container_name: frontend
+    ports:
+      - "3123:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:3000

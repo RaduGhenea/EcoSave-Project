@@ -7,10 +7,10 @@ from services.user_service import DailyScores, User, system_state
 from routes.user_routes import user_bp
 from PIL import Image
 from extensions import bcrypt, db, jwt
-import time
 from flask_jwt_extended import (verify_jwt_in_request, get_jwt_identity)
 from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError
 from apscheduler.schedulers.background import BackgroundScheduler
+
 
 app = Flask(__name__)
 app.config.from_object(config.app_config)
@@ -23,7 +23,8 @@ jwt.init_app(app)
 scheduler = BackgroundScheduler()
 
 cors=CORS(
-    app, origins=["http://localhost:5173", "https://ecosave-project.onrender.com"],
+    # app, origins=["http://localhost:3123", "https://ecosave-project.onrender.com"],
+    app, origins=["*", "https://ecosave-project.onrender.com"],
     supports_credentials=True,           # allow Authorization or cookies
     methods=["GET", "POST", "OPTIONS"],  # allow GET and OPTIONS
     allow_headers=["Content-Type", "Authorization"]

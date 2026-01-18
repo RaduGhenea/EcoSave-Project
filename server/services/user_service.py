@@ -1,5 +1,7 @@
 import datetime
 from uuid import uuid4
+
+from sqlalchemy.util.typing import final
 from extensions import db
 
 class User(db.Model):
@@ -21,6 +23,7 @@ class system_state(db.Model):
     __tablename__ = "system_state"
     id = db.Column(db.String(32), primary_key=True, default=uuid4().hex)
     last_wipe = db.Column(db.DateTime, default=datetime.date.today())
+
 
 
 

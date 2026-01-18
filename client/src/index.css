@@ -15,7 +15,13 @@ body {
   width: 1fr;
   justify-content: center;
   column-gap: 50px;
+  row-gap: 50px;
   align-items: center;
+}
+@media (max-width: 1100px) {
+  .main-container {
+    flex-direction: column;
+  }
 }
 
 .card-container, .About-Us-Card {

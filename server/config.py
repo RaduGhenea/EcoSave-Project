@@ -5,7 +5,7 @@ from datetime import timedelta
 load_dotenv()
 
 AI_KEY=os.getenv('GOOGLE_GENAI_KEY')
-TESTING = True
+TESTING = False
 target_size=(224, 224)
 
 class app_config():

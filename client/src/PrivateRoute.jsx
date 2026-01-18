@@ -9,6 +9,7 @@ function PrivateRoute({children}) {
   useEffect(() => {
     if(!token || isTokenExpired(token)) {
       logout()
+      console.log("de ce sunt aici inca?")
     }
   }, [token, logout])
 
