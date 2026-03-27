@@ -10,7 +10,8 @@ from extensions import bcrypt, db, jwt
 from flask_jwt_extended import (verify_jwt_in_request, get_jwt_identity)
 from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError
 from apscheduler.schedulers.background import BackgroundScheduler
-
+from sqlalchemy.exc import OperationalError
+import time
 
 app = Flask(__name__)
 app.config.from_object(config.app_config)
@@ -51,7 +52,22 @@ scheduler.add_job(
 
 def on_startup():
     print("🔥 Server is starting up...")
-
+    retries = 5
+    while retries > 0:
+        try:
+            with app.app_context():
+                db.create_all()
+                user_exists = User.query.filter_by(email='ecosave.generic@gmail.com').first() is not None
+                if not user_exists:
+                    hashed_password = bcrypt.generate_password_hash('ESgeneric123')
+                    new_user = (User(email='ecosave.generic@gmail.com', password=hashed_password, username='generic_user'))
+                    db.session.add(new_user)
+                    db.session.commit()
+                break
+        except OperationalError:
+            retries -= 1
+            print(f"Waiting for database... {retries} retries left")
+            time.sleep(2)
     with app.app_context():
         daily_cleanup()
         system_data = system_state.query.first()
@@ -62,6 +78,7 @@ def on_startup():
             db.session.commit()
         if(datetime.date.today().day > system_data.last_wipe.day):
             daily_cleanup()
+
 
     print(system_data.last_wipe.day)
 
@@ -102,6 +119,6 @@ def upload_image():
     return jsonify(response=response, streakchanged=streak_changed)
 
 
+on_startup()
 if __name__ == "__main__":
-    on_startup()
     app.run(debug=True, port=3000)

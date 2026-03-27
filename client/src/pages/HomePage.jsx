@@ -26,7 +26,7 @@ function HomePage() {
         <div className="about-card-content-container">
           <div className="about-background">
             <p className="username-text">
-              At EcoTrack, we believe that every small action counts. Our mission is to make recycling simple, rewarding, and fun for everyone. With just a quick photo, you can identify different types of waste, learn how to dispose of them properly, and contribute to a cleaner planet — one item at a time.
+              At EcoSave, we believe that every small action counts. Our mission is to make recycling simple, rewarding, and fun for everyone. With just a quick photo, you can identify different types of waste, learn how to dispose of them properly, and contribute to a cleaner planet — one item at a time.
             </p>
             <p className="username-text">
               We’re not just an app — we’re a growing community of eco-conscious individuals building better habits together. Track your recycling streaks, compete on weekly leaderboards, and celebrate your progress as you make a real-world impact.

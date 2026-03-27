@@ -29,7 +29,7 @@ function AuthProvider({children}) {
       headers: {Authorization: `Bearer ${token}`},
     })
       .then((res) => {
-        if(!res.ok) console.log("invalid token") 
+        if(!res.ok) console.log("invalid token")
         const contentType = res.headers.get("content-type") || "";
         if (!contentType.includes("application/json")) {
           console.log(res.text())

@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      # - GOOGLE_GENAI_KEY=CHEIE
+      # - GOOGLE_GENAI_KEY=cheie
       - JWT_SECRET_KEY=supersecretkey
       - DATABASE_PATH=/database.db
 
